@@ -6,6 +6,7 @@ import Stats from "@/components/Stats";
 import Branches from "@/components/Branches";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
+import SSS from "@/components/SSS";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Branches />
         <Gallery />
         <Testimonials />
+        <SSS />
         <ContactForm />
       </main>
       <Footer />

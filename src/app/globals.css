@@ -1,13 +1,47 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #2D2E83;
-  --color-navy-dark: #1e1f5c;
-  --color-red: #E30A17;
-  --color-red-dark: #c00812;
-  --color-background: #f8fafc;
-  --color-foreground: #0f172a;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  /* ── Çankaya brand ─────────────────────────────── */
+  --color-navy:       #2D2E83;
+  --color-navy-dark:  #1e1f5c;
+  --color-red:        #E30A17;
+  --color-red-dark:   #c00812;
+
+  /* ── Quizlet-style neutrals ────────────────────── */
+  --color-ink:        #282e3e;
+  --color-slate-text: #586380;
+  --color-light-slate:#939bb4;
+  --color-page-bg:    #f6f7fb;
+  --color-surface:    #ffffff;
+  --color-border:     #d9dde8;
+
+  /* ── Accent palette ────────────────────────────── */
+  --color-sky:           #98e3ff;
+  --color-pink:          #eeaaff;
+  --color-accent-orange: #ffc38c;
+
+  /* ── Semantic aliases ──────────────────────────── */
+  --color-background: #f6f7fb;
+  --color-foreground: #282e3e;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --font-display: var(--font-display-family), var(--font-nunito), system-ui, sans-serif;
+}
+
+/* ── Quizlet shadow utilities (Tailwind v4 syntax) ─ */
+@utility shadow-card {
+  box-shadow: rgba(40, 46, 62, 0.10) 0px 4px 16px 0px;
+}
+
+@utility shadow-card-sm {
+  box-shadow: rgba(40, 46, 62, 0.10) 0px 2px 4px 0px;
+}
+
+@utility shadow-card-hover {
+  box-shadow: rgba(40, 46, 62, 0.16) 0px 8px 24px 0px;
+}
+
+@utility shadow-inner-subtle {
+  box-shadow: rgba(0, 0, 0, 0.30) 0px 0px 1px 0px inset;
 }
 
 html {
@@ -18,4 +52,9 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+}
+
+/* Headings use the rounded display face (Fredoka) */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
 }

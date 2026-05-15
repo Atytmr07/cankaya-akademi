@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BookOpen,
@@ -71,15 +71,15 @@ const programs: Program[] = [
       },
       {
         icon: Globe,
-        label: "Yabancı Dil",
+        label: "İngilizce Kursu",
         detail:
-          "Yaş grubuna uygun, oyunlarla desteklenmiş İngilizce dersleri ile dil öğrenimine erken başlangıç.",
+          "Yaş grubuna uygun, oyunlarla ve etkileşimli aktivitelerle desteklenen İngilizce dersleri ile dil öğrenimine sağlam ve erken bir başlangıç.",
       },
       {
         icon: Puzzle,
-        label: "Satranç & Akıl Oyunları",
+        label: "Satranç Kursu & Akıl Oyunları",
         detail:
-          "Stratejik düşünme, odaklanma ve problem çözme becerilerini geliştiren özel atölyeler.",
+          "Lisanslı eğitmen eşliğinde satranç dersleri; stratejik düşünme, odaklanma ve problem çözme becerilerini geliştiren akıl oyunu atölyeleri.",
       },
     ],
   },
@@ -131,15 +131,41 @@ const programs: Program[] = [
         detail:
           "Gerçek sınav koşullarında düzenli denemeler, detaylı analiz raporları ve birebir geri bildirim.",
       },
+      {
+        icon: Globe,
+        label: "İngilizce Kursu",
+        detail:
+          "LGS İngilizce kazanımlarına yönelik konu anlatımı ve konuşma pratiğiyle güçlü bir dil temeli.",
+      },
+      {
+        icon: Puzzle,
+        label: "Satranç Kursu",
+        detail:
+          "Stratejik düşünme ve konsantrasyonu güçlendiren, lisanslı eğitmen eşliğinde satranç dersleri.",
+      },
     ],
   },
 ];
 
 export default function Programs() {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  function handleExpand(programId: string, isCurrentlyOpen: boolean) {
+    setExpanded(isCurrentlyOpen ? null : programId);
+    if (!isCurrentlyOpen) {
+      // Smooth scroll to the card after animation starts
+      setTimeout(() => {
+        cardRefs.current[programId]?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 80);
+    }
+  }
 
   return (
-    <section className="py-20 sm:py-28 bg-white" id="programlar">
+    <section className="pt-20 sm:pt-28 pb-0 bg-[#f6f7fb]" id="programlar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -149,14 +175,27 @@ export default function Programs() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 bg-[#2D2E83]/10 text-[#2D2E83] text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">
+          <span className="inline-block px-4 py-1.5 bg-[#2D2E83]/8 text-[#2D2E83] text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">
             Programlarımız
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2D2E83] tracking-tight">
-            Her Yaşa Uygun Eğitim
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#282e3e] tracking-tight">
+            Her Yaşa{" "}
+            <span
+              style={{
+                background: "linear-gradient(130deg, #2D2E83 0%, #E30A17 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Özel Eğitim
+            </span>
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-            Karta tıklayarak programın detaylarını görebilirsiniz.
+          <p className="mt-4 text-lg text-[#586380] max-w-2xl mx-auto">
+            Akademik desteğin yanında <strong className="text-[#2D2E83] font-semibold">İngilizce</strong> ve{" "}
+            <strong className="text-[#2D2E83] font-semibold">satranç</strong> kurslarımızla
+            da öğrencilerimizi geleceğe hazırlıyoruz. Karta tıklayarak tüm
+            detayları keşfedin.
           </p>
         </motion.div>
 
@@ -169,11 +208,12 @@ export default function Programs() {
             return (
               <motion.div
                 key={program.id}
+                ref={(el) => { cardRefs.current[program.id] = el; }}
                 initial={{ opacity: 0, x: index === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative bg-gradient-to-br ${program.cardBg} rounded-2xl shadow-lg shadow-slate-200/60 border ${program.cardBorder} overflow-hidden transition-shadow duration-300 hover:shadow-xl`}
+                className={`relative bg-gradient-to-br ${program.cardBg} rounded-lg shadow-card border ${program.cardBorder} overflow-hidden transition-shadow duration-300 hover:shadow-card-hover`}
               >
                 <div
                   className={`absolute top-0 right-0 w-32 h-32 ${program.cornerBg} rounded-bl-[80px] pointer-events-none`}
@@ -181,7 +221,7 @@ export default function Programs() {
 
                 {/* LGS Badge */}
                 {program.showLgsBadge && (
-                  <div className="absolute top-6 right-6 bg-[#E30A17] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md shadow-red-200 z-10">
+                  <div className="absolute top-6 right-6 bg-[#E30A17] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-card-sm z-10">
                     LGS
                   </div>
                 )}
@@ -189,13 +229,13 @@ export default function Programs() {
                 {/* Header (always visible) */}
                 <button
                   type="button"
-                  onClick={() => setExpanded(isOpen ? null : program.id)}
-                  className="relative w-full text-left p-8 sm:p-10 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2D2E83]/40 rounded-2xl"
+                  onClick={() => handleExpand(program.id, isOpen)}
+                  className="relative w-full text-left p-8 sm:p-10 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2D2E83]/40 rounded-lg"
                   aria-expanded={isOpen}
                   aria-controls={`${program.id}-content`}
                 >
                   <div
-                    className={`inline-flex items-center gap-2 px-4 py-2 ${program.accentBgSoft} rounded-xl mb-6`}
+                    className={`inline-flex items-center gap-2 px-4 py-2 ${program.accentBgSoft} rounded-lg mb-6`}
                   >
                     <BadgeIcon
                       className={`w-5 h-5 ${program.accentText}`}
@@ -228,7 +268,7 @@ export default function Programs() {
                         className="flex items-center gap-4"
                       >
                         <div
-                          className={`w-9 h-9 rounded-xl ${program.accentBgSoft} flex items-center justify-center shrink-0`}
+                          className={`w-9 h-9 rounded-lg ${program.accentBgSoft} flex items-center justify-center shrink-0`}
                         >
                           <feature.icon
                             className={`w-4 h-4 ${program.accentText}`}
@@ -275,7 +315,7 @@ export default function Programs() {
                     >
                       <div className="px-8 sm:px-10 pb-8 sm:pb-10 space-y-5">
                         <div
-                          className={`p-5 rounded-2xl bg-white border ${program.cardBorder}`}
+                          className={`p-5 rounded-lg bg-white border ${program.cardBorder}`}
                         >
                           <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                             {program.longDescription}
@@ -286,11 +326,11 @@ export default function Programs() {
                           {program.features.map((feature) => (
                             <li
                               key={feature.label}
-                              className="bg-white rounded-xl p-4 border border-slate-100"
+                              className="bg-white rounded-lg p-4 border border-[#d9dde8]/60"
                             >
                               <div className="flex items-start gap-4">
                                 <div
-                                  className={`w-10 h-10 rounded-xl ${program.accentBgSoft} flex items-center justify-center shrink-0`}
+                                  className={`w-10 h-10 rounded-lg ${program.accentBgSoft} flex items-center justify-center shrink-0`}
                                 >
                                   <feature.icon
                                     className={`w-5 h-5 ${program.accentText}`}
@@ -312,7 +352,7 @@ export default function Programs() {
 
                         <a
                           href="#iletisim"
-                          className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 ${program.accentBg} text-white font-semibold rounded-xl hover:opacity-90 transition-opacity duration-200 cursor-pointer text-sm shadow-lg`}
+                          className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 ${program.accentBg} text-white font-semibold rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer text-sm shadow-card-sm`}
                         >
                           Bu Program İçin Bilgi Al
                         </a>
@@ -324,6 +364,13 @@ export default function Programs() {
             );
           })}
         </div>
+      </div>
+
+      {/* Wave → Stats (#2D2E83) */}
+      <div className="pointer-events-none mt-16 sm:mt-20 -mb-px">
+        <svg viewBox="0 0 1440 60" className="w-full block h-[44px] sm:h-[64px]" style={{ fill: "#2D2E83" }} preserveAspectRatio="none">
+          <path d="M0,60 L0,34 C240,8 480,52 720,32 C960,12 1200,48 1440,28 L1440,60 Z" />
+        </svg>
       </div>
     </section>
   );
