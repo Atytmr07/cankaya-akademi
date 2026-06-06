@@ -74,10 +74,10 @@ export default function ContactForm() {
 
   return (
     <section
-      className="pt-20 sm:pt-28 pb-0 bg-[#f6f7fb] relative"
+      className="py-20 sm:py-28 bg-gradient-to-b from-white to-slate-50"
       id="iletisim"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Column - Text */}
           <motion.div
@@ -89,26 +89,16 @@ export default function ContactForm() {
             <span className="inline-block px-4 py-1.5 bg-[#E30A17]/10 text-[#E30A17] text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">
               İletişim
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#282e3e] leading-tight tracking-tight">
-              Başarı Serüvenini{" "}
-              <span
-                style={{
-                  background: "linear-gradient(130deg, #2D2E83 0%, #E30A17 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Birlikte Planlayalım.
-              </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2D2E83] leading-tight tracking-tight">
+              Öğrencimizin Başarı Serüvenini Birlikte Planlayalım.
             </h2>
-            <p className="mt-6 text-lg text-[#586380] leading-relaxed">
+            <p className="mt-6 text-lg text-slate-600 leading-relaxed">
               Formu doldurun, eğitim danışmanlarımız sizi en kısa sürede
               arasın. İlk görüşme tamamen ücretsizdir.
             </p>
 
-            <div className="mt-8 flex items-center gap-4 p-4 bg-[#2D2E83]/5 rounded-lg">
-              <div className="w-12 h-12 rounded-lg bg-[#2D2E83]/10 flex items-center justify-center shrink-0">
+            <div className="mt-8 flex items-center gap-4 p-4 bg-[#2D2E83]/5 rounded-2xl">
+              <div className="w-12 h-12 rounded-xl bg-[#2D2E83]/10 flex items-center justify-center shrink-0">
                 <Phone className="w-6 h-6 text-[#2D2E83]" strokeWidth={1.8} />
               </div>
               <div>
@@ -130,7 +120,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="bg-white rounded-lg p-8 sm:p-10 shadow-card border border-[#d9dde8]/60">
+            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
               {status === "success" ? (
                 <div className="text-center py-8">
                   <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">
@@ -182,7 +172,7 @@ export default function ContactForm() {
                         setFormData({ ...formData, veliAdi: e.target.value });
                         if (status === "error") setStatus("idle");
                       }}
-                      className="w-full px-4 py-3 rounded border border-[#d9dde8] bg-[#f6f7fb] text-[#282e3e] placeholder-[#939bb4] focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/25 focus:border-[#2D2E83] transition-all duration-200"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/30 focus:border-[#2D2E83] transition-all duration-200"
                       placeholder="Adınız Soyadınız"
                     />
                   </div>
@@ -206,7 +196,7 @@ export default function ContactForm() {
                         });
                         if (status === "error") setStatus("idle");
                       }}
-                      className="w-full px-4 py-3 rounded border border-[#d9dde8] bg-[#f6f7fb] text-[#282e3e] focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/25 focus:border-[#2D2E83] transition-all duration-200 cursor-pointer appearance-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/30 focus:border-[#2D2E83] transition-all duration-200 cursor-pointer appearance-none"
                     >
                       <option value="" disabled>
                         Seçiniz
@@ -236,13 +226,13 @@ export default function ContactForm() {
                         setFormData({ ...formData, telefon: e.target.value });
                         if (status === "error") setStatus("idle");
                       }}
-                      className="w-full px-4 py-3 rounded border border-[#d9dde8] bg-[#f6f7fb] text-[#282e3e] placeholder-[#939bb4] focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/25 focus:border-[#2D2E83] transition-all duration-200"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2D2E83]/30 focus:border-[#2D2E83] transition-all duration-200"
                       placeholder="05XX XXX XX XX"
                     />
                   </div>
 
                   {status === "error" && (
-                    <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-100 rounded-lg">
+                    <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-100 rounded-xl">
                       <AlertCircle
                         className="w-5 h-5 text-[#E30A17] mt-0.5 shrink-0"
                         strokeWidth={2}
@@ -253,7 +243,7 @@ export default function ContactForm() {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2.5 px-6 py-4 bg-[#25D366] text-white font-bold rounded-full hover:bg-[#1faa52] transition-colors duration-200 cursor-pointer shadow-card-sm text-base"
+                    className="w-full flex items-center justify-center gap-2.5 px-6 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#1faa52] transition-colors duration-200 cursor-pointer shadow-lg shadow-green-200/60 text-base"
                   >
                     <WhatsAppIcon className="w-5 h-5" />
                     WhatsApp ile Gönder
@@ -270,12 +260,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Wave → Footer (#2D2E83) */}
-      <div className="pointer-events-none -mb-px">
-        <svg viewBox="0 0 1440 60" className="w-full block h-[44px] sm:h-[64px]" style={{ fill: "#2D2E83" }} preserveAspectRatio="none">
-          <path d="M0,60 L0,32 C360,60 720,6 1080,34 C1260,48 1380,34 1440,30 L1440,60 Z" />
-        </svg>
-      </div>
+
     </section>
   );
 }
