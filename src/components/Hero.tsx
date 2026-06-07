@@ -16,6 +16,17 @@ const floatingShapes = [
   { size: "w-2 h-2",   shape: "rounded-full",     color: "bg-[#E30A17]/20",  top: "45%",  left:  "12%",  dur: 2.9, delay: 1.3,  y: 10 },
 ];
 
+const floatingEmojis = [
+  { emoji: "📚", top: "6%",    left:  "1%",   size: "text-2xl", dur: 4.2, delay: 0,    y: 14, rot: 8  },
+  { emoji: "⭐", top: "16%",   right: "2%",   size: "text-xl",  dur: 3.8, delay: 0.7,  y: 10, rot: -6 },
+  { emoji: "🎯", top: "55%",   left:  "0.5%", size: "text-xl",  dur: 5.0, delay: 1.1,  y: 12, rot: 5  },
+  { emoji: "🏆", top: "28%",   right: "1.5%", size: "text-2xl", dur: 4.6, delay: 0.3,  y: 8,  rot: -8 },
+  { emoji: "✏️", bottom:"22%", left:  "2%",   size: "text-xl",  dur: 3.5, delay: 0.9,  y: 14, rot: 10 },
+  { emoji: "🧩", top: "48%",   right: "2.5%", size: "text-lg",  dur: 4.8, delay: 1.4,  y: 10, rot: -5 },
+  { emoji: "💡", bottom:"12%", right: "3%",   size: "text-2xl", dur: 5.3, delay: 0.5,  y: 16, rot: 7  },
+  { emoji: "🌟", top: "4%",    right: "18%",  size: "text-lg",  dur: 3.3, delay: 1.8,  y: 8,  rot: -10 },
+];
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
@@ -32,7 +43,7 @@ export default function Hero() {
       <div className="absolute top-20 -left-20 w-72 h-72 bg-[#2D2E83]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 -right-20 w-96 h-96 bg-[#E30A17]/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Floating shapes */}
+      {/* Floating geometric shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {floatingShapes.map((s, i) => (
           <motion.div
@@ -52,6 +63,34 @@ export default function Hero() {
               ease: "easeInOut",
             }}
           />
+        ))}
+      </div>
+
+      {/* Floating emojis */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {floatingEmojis.map((e, i) => (
+          <motion.span
+            key={i}
+            className={`absolute ${e.size} select-none opacity-70`}
+            style={{
+              top: e.top,
+              bottom: e.bottom,
+              left: e.left,
+              right: e.right,
+            }}
+            animate={{
+              y: [0, -e.y, 0],
+              rotate: [0, e.rot, 0, -e.rot * 0.5, 0],
+            }}
+            transition={{
+              duration: e.dur,
+              repeat: Infinity,
+              delay: e.delay,
+              ease: "easeInOut",
+            }}
+          >
+            {e.emoji}
+          </motion.span>
         ))}
       </div>
 
