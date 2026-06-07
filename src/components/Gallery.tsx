@@ -19,6 +19,7 @@ import {
 type ActivityItem = {
   title: string;
   description: string;
+  tag: string;
   icon: LucideIcon;
   gradient: string;
   iconBg: string;
@@ -28,6 +29,7 @@ const items: ActivityItem[] = [
   {
     title: "Ödev Takibi",
     description: "Okul ödevlerinin uzman gözetiminde eksiksiz tamamlanması.",
+    tag: "Her Gün",
     icon: PencilLine,
     gradient: "from-[#2D2E83] via-[#3a3bb0] to-[#4f50c7]",
     iconBg: "bg-white/20",
@@ -35,6 +37,7 @@ const items: ActivityItem[] = [
   {
     title: "LGS Hazırlığı",
     description: "Sistematik konu anlatımı, soru çözümü ve deneme analizi.",
+    tag: "8. Sınıf",
     icon: Target,
     gradient: "from-[#E30A17] via-[#ef3b46] to-[#f56a72]",
     iconBg: "bg-white/20",
@@ -42,6 +45,7 @@ const items: ActivityItem[] = [
   {
     title: "Etüt Saatleri",
     description: "Sessiz, odaklanma dostu verimli çalışma ortamı.",
+    tag: "Tüm Sınıflar",
     icon: BookOpenCheck,
     gradient: "from-amber-400 via-amber-500 to-orange-500",
     iconBg: "bg-white/25",
@@ -49,6 +53,7 @@ const items: ActivityItem[] = [
   {
     title: "Birebir Koçluk",
     description: "Her öğrenciye özel hedef ve kişisel gelişim planı.",
+    tag: "Kişiye Özel",
     icon: Users,
     gradient: "from-emerald-500 via-teal-500 to-cyan-500",
     iconBg: "bg-white/25",
@@ -56,6 +61,7 @@ const items: ActivityItem[] = [
   {
     title: "Akıl Oyunları",
     description: "Satranç ve zeka oyunlarıyla stratejik düşünme.",
+    tag: "Satranç",
     icon: Brain,
     gradient: "from-fuchsia-500 via-purple-500 to-indigo-500",
     iconBg: "bg-white/25",
@@ -63,6 +69,7 @@ const items: ActivityItem[] = [
   {
     title: "İngilizce",
     description: "Oyun temelli, yaş grubuna uygun dil öğrenimi.",
+    tag: "Yabancı Dil",
     icon: Globe,
     gradient: "from-sky-400 via-cyan-400 to-teal-400",
     iconBg: "bg-white/20",
@@ -70,6 +77,7 @@ const items: ActivityItem[] = [
   {
     title: "Bursluluk Sınavı",
     description: "İOKBS ve özel burs sınavlarına hazırlık programı.",
+    tag: "İOKBS",
     icon: Trophy,
     gradient: "from-indigo-500 via-blue-500 to-violet-500",
     iconBg: "bg-white/20",
@@ -77,6 +85,7 @@ const items: ActivityItem[] = [
   {
     title: "Eğitim Koçluğu",
     description: "Çalışma planı, hedef belirleme ve motivasyon desteği.",
+    tag: "Planlama",
     icon: GraduationCap,
     gradient: "from-slate-600 via-slate-700 to-slate-800",
     iconBg: "bg-white/20",
@@ -84,6 +93,7 @@ const items: ActivityItem[] = [
   {
     title: "Yaratıcı Öğrenme",
     description: "Oyun temelli, etkileşimli ve eğlenceli ders ortamı.",
+    tag: "Atölye",
     icon: Sparkles,
     gradient: "from-rose-400 via-pink-500 to-fuchsia-500",
     iconBg: "bg-white/25",
@@ -91,52 +101,95 @@ const items: ActivityItem[] = [
   {
     title: "Veli Takibi",
     description: "Düzenli raporlar ve birebir gelişim görüşmeleri.",
+    tag: "Şeffaf",
     icon: Heart,
     gradient: "from-rose-500 via-red-400 to-orange-400",
     iconBg: "bg-white/20",
   },
 ];
 
-function ActivityCard({ item }: { item: ActivityItem }) {
+function ActivityCard({
+  item,
+  rotateDir,
+}: {
+  item: ActivityItem;
+  rotateDir: 1 | -1;
+}) {
   const Icon = item.icon;
   return (
-    <div className="w-[200px] sm:w-[215px] shrink-0 rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-card hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 mx-2.5">
-      {/* Gradient top */}
+    <motion.div
+      whileHover={{ y: -10, scale: 1.06, rotate: rotateDir * 1.2 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 350, damping: 20 }}
+      className="group w-[210px] sm:w-[225px] shrink-0 rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-card cursor-default mx-3 relative"
+    >
+      {/* Gradient top area */}
       <div
-        className={`h-[100px] bg-gradient-to-br ${item.gradient} relative flex items-center justify-center overflow-hidden`}
+        className={`h-[118px] bg-gradient-to-br ${item.gradient} relative flex items-center justify-center overflow-hidden`}
       >
+        {/* Dot texture */}
         <div
-          className="absolute inset-0 opacity-[0.08] pointer-events-none"
+          className="absolute inset-0 opacity-[0.10] pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "18px 18px",
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundSize: "16px 16px",
           }}
         />
-        <div
-          className={`w-12 h-12 rounded-xl ${item.iconBg} backdrop-blur-sm flex items-center justify-center relative z-10`}
-        >
-          <Icon className="w-6 h-6 text-white" strokeWidth={2} />
+
+        {/* Decorative corner sparkle */}
+        <div className="absolute top-3 right-3 w-5 h-5 bg-white/15 rounded-full flex items-center justify-center">
+          <span className="text-white text-[9px] select-none">✦</span>
         </div>
+
+        {/* Tag pill */}
+        <div className="absolute bottom-2.5 left-3 bg-black/20 backdrop-blur-sm rounded-full px-2 py-0.5">
+          <span className="text-white/90 text-[10px] font-semibold tracking-wide">
+            {item.tag}
+          </span>
+        </div>
+
+        {/* Icon with individual hover */}
+        <motion.div
+          whileHover={{ scale: 1.18, rotate: 8 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          className={`w-14 h-14 rounded-2xl ${item.iconBg} backdrop-blur-sm flex items-center justify-center relative z-10`}
+        >
+          <Icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+        </motion.div>
       </div>
+
       {/* Content */}
-      <div className="px-4 py-3.5">
-        <h3 className="text-sm font-bold text-[#282e3e] leading-tight">{item.title}</h3>
+      <div className="px-4 pt-3.5 pb-4 relative">
+        {/* Colored bottom reveal line */}
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r ${item.gradient} scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}
+        />
+        <h3 className="text-sm font-bold text-[#282e3e] leading-tight">
+          {item.title}
+        </h3>
         <p className="text-[11px] text-[#586380] mt-1 leading-snug line-clamp-2">
           {item.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-function MarqueeRow({ reversed = false, speed = 32 }: { reversed?: boolean; speed?: number }) {
+function MarqueeRow({
+  reversed = false,
+  speed = 32,
+}: {
+  reversed?: boolean;
+  speed?: number;
+}) {
   const [paused, setPaused] = useState(false);
   const row = reversed ? [...items].reverse() : items;
   const doubled = [...row, ...row];
 
   return (
     <div
-      className="overflow-hidden py-1.5"
+      className="overflow-hidden py-2"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -151,7 +204,11 @@ function MarqueeRow({ reversed = false, speed = 32 }: { reversed?: boolean; spee
         }}
       >
         {doubled.map((item, i) => (
-          <ActivityCard key={`${item.title}-${i}`} item={item} />
+          <ActivityCard
+            key={`${item.title}-${i}`}
+            item={item}
+            rotateDir={i % 2 === 0 ? 1 : -1}
+          />
         ))}
       </div>
     </div>
@@ -160,9 +217,22 @@ function MarqueeRow({ reversed = false, speed = 32 }: { reversed?: boolean; spee
 
 export default function Gallery() {
   return (
-    <section className="pt-20 sm:pt-28 pb-0 bg-white" id="galeri">
+    <section
+      className="pt-20 sm:pt-28 pb-0 bg-white relative overflow-hidden"
+      id="galeri"
+    >
+      {/* Subtle background texture */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, #2D2E83 1.5px, transparent 0)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
       {/* Section header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -193,14 +263,32 @@ export default function Gallery() {
         </motion.div>
       </div>
 
-      {/* Full-width marquee rows */}
-      <div className="space-y-3 mt-2">
-        <MarqueeRow speed={36} />
-        <MarqueeRow reversed speed={28} />
+      {/* Marquee rows with edge fade masks */}
+      <div className="relative mt-2">
+        {/* Left edge mask */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-14 sm:w-32 z-10 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, white 0%, transparent 100%)",
+          }}
+        />
+        {/* Right edge mask */}
+        <div
+          className="absolute right-0 top-0 bottom-0 w-14 sm:w-32 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(to left, white 0%, transparent 100%)",
+          }}
+        />
+
+        <div className="space-y-3">
+          <MarqueeRow speed={38} />
+          <MarqueeRow reversed speed={30} />
+        </div>
       </div>
 
       {/* CTA */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
