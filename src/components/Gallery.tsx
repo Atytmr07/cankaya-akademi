@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpenCheck,
@@ -10,92 +10,159 @@ import {
   Brain,
   GraduationCap,
   Sparkles,
+  Globe,
+  Trophy,
+  Heart,
   type LucideIcon,
 } from "lucide-react";
 
-type GalleryItem = {
+type ActivityItem = {
   title: string;
   description: string;
   icon: LucideIcon;
   gradient: string;
   iconBg: string;
-  iconColor: string;
-  span?: "wide" | "tall";
-  src?: string;
 };
 
-const items: GalleryItem[] = [
+const items: ActivityItem[] = [
   {
-    title: "Ödev Yapan Öğrenciler",
-    description: "Birebir gözetimde, okul ödevleri zamanında ve eksiksiz.",
+    title: "Ödev Takibi",
+    description: "Okul ödevlerinin uzman gözetiminde eksiksiz tamamlanması.",
     icon: PencilLine,
     gradient: "from-[#2D2E83] via-[#3a3bb0] to-[#4f50c7]",
     iconBg: "bg-white/20",
-    iconColor: "text-white",
-    span: "wide",
-    src: "/gallery/odev-yapan.png",
   },
   {
     title: "LGS Hazırlığı",
-    description: "Konu tekrarı, soru çözümü ve düzenli denemeler.",
+    description: "Sistematik konu anlatımı, soru çözümü ve deneme analizi.",
     icon: Target,
     gradient: "from-[#E30A17] via-[#ef3b46] to-[#f56a72]",
     iconBg: "bg-white/20",
-    iconColor: "text-white",
-    src: "/gallery/lgs-hazirligi.png",
   },
   {
     title: "Etüt Saatleri",
-    description: "Sessiz, odaklanma dostu çalışma ortamı.",
+    description: "Sessiz, odaklanma dostu verimli çalışma ortamı.",
     icon: BookOpenCheck,
     gradient: "from-amber-400 via-amber-500 to-orange-500",
     iconBg: "bg-white/25",
-    iconColor: "text-white",
-    src: "/gallery/etut-saatleri.png",
   },
   {
     title: "Birebir Koçluk",
-    description: "Her öğrenciye özel hedef ve gelişim planı.",
+    description: "Her öğrenciye özel hedef ve kişisel gelişim planı.",
     icon: Users,
     gradient: "from-emerald-500 via-teal-500 to-cyan-500",
     iconBg: "bg-white/25",
-    iconColor: "text-white",
-    src: "/gallery/birebir-kocluk.png",
   },
   {
-    title: "Şubemiz",
-    description: "Çankaya Akademi · Kepez / Antalya",
-    icon: GraduationCap,
-    gradient: "from-slate-700 via-slate-800 to-slate-900",
-    iconBg: "bg-white/20",
-    iconColor: "text-white",
-    src: "/2026-02-09.webp",
-  },
-  {
-    title: "Akıl & Zeka Oyunları",
-    description: "Stratejik düşünme ve problem çözme atölyeleri.",
+    title: "Akıl Oyunları",
+    description: "Satranç ve zeka oyunlarıyla stratejik düşünme.",
     icon: Brain,
     gradient: "from-fuchsia-500 via-purple-500 to-indigo-500",
     iconBg: "bg-white/25",
-    iconColor: "text-white",
-    src: "/gallery/satranc-zeka.png",
+  },
+  {
+    title: "İngilizce",
+    description: "Oyun temelli, yaş grubuna uygun dil öğrenimi.",
+    icon: Globe,
+    gradient: "from-sky-400 via-cyan-400 to-teal-400",
+    iconBg: "bg-white/20",
+  },
+  {
+    title: "Bursluluk Sınavı",
+    description: "İOKBS ve özel burs sınavlarına hazırlık programı.",
+    icon: Trophy,
+    gradient: "from-indigo-500 via-blue-500 to-violet-500",
+    iconBg: "bg-white/20",
+  },
+  {
+    title: "Eğitim Koçluğu",
+    description: "Çalışma planı, hedef belirleme ve motivasyon desteği.",
+    icon: GraduationCap,
+    gradient: "from-slate-600 via-slate-700 to-slate-800",
+    iconBg: "bg-white/20",
   },
   {
     title: "Yaratıcı Öğrenme",
-    description: "Oyun temelli ve etkileşimli ders ortamı.",
+    description: "Oyun temelli, etkileşimli ve eğlenceli ders ortamı.",
     icon: Sparkles,
     gradient: "from-rose-400 via-pink-500 to-fuchsia-500",
     iconBg: "bg-white/25",
-    iconColor: "text-white",
-    src: "/gallery/yaratici-ogrenme.png",
+  },
+  {
+    title: "Veli Takibi",
+    description: "Düzenli raporlar ve birebir gelişim görüşmeleri.",
+    icon: Heart,
+    gradient: "from-rose-500 via-red-400 to-orange-400",
+    iconBg: "bg-white/20",
   },
 ];
+
+function ActivityCard({ item }: { item: ActivityItem }) {
+  const Icon = item.icon;
+  return (
+    <div className="w-[200px] sm:w-[215px] shrink-0 rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-card hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 mx-2.5">
+      {/* Gradient top */}
+      <div
+        className={`h-[100px] bg-gradient-to-br ${item.gradient} relative flex items-center justify-center overflow-hidden`}
+      >
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundSize: "18px 18px",
+          }}
+        />
+        <div
+          className={`w-12 h-12 rounded-xl ${item.iconBg} backdrop-blur-sm flex items-center justify-center relative z-10`}
+        >
+          <Icon className="w-6 h-6 text-white" strokeWidth={2} />
+        </div>
+      </div>
+      {/* Content */}
+      <div className="px-4 py-3.5">
+        <h3 className="text-sm font-bold text-[#282e3e] leading-tight">{item.title}</h3>
+        <p className="text-[11px] text-[#586380] mt-1 leading-snug line-clamp-2">
+          {item.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function MarqueeRow({ reversed = false, speed = 32 }: { reversed?: boolean; speed?: number }) {
+  const [paused, setPaused] = useState(false);
+  const row = reversed ? [...items].reverse() : items;
+  const doubled = [...row, ...row];
+
+  return (
+    <div
+      className="overflow-hidden py-1.5"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div
+        className="flex"
+        style={{
+          animation: `${reversed ? "marquee-right" : "marquee-left"} ${speed}s linear infinite`,
+          animationPlayState: paused ? "paused" : "running",
+          animationFillMode: "both",
+          willChange: "transform",
+          ...(reversed && { transform: "translateX(-50%)" }),
+        }}
+      >
+        {doubled.map((item, i) => (
+          <ActivityCard key={`${item.title}-${i}`} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Gallery() {
   return (
     <section className="pt-20 sm:pt-28 pb-0 bg-white" id="galeri">
+      {/* Section header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,10 +171,10 @@ export default function Gallery() {
           className="text-center mb-14"
         >
           <span className="inline-block px-4 py-1.5 bg-[#2D2E83]/10 text-[#2D2E83] text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">
-            Galeri
+            Akademi Hayatı
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#282e3e] tracking-tight">
-            Akademi Yaşamından{" "}
+            Neler{" "}
             <span
               style={{
                 background: "linear-gradient(130deg, #2D2E83 0%, #7c3aed 100%)",
@@ -116,87 +183,24 @@ export default function Gallery() {
                 backgroundClip: "text",
               }}
             >
-              Kareler
+              Yapıyoruz?
             </span>
           </h2>
           <p className="mt-4 text-lg text-[#586380] max-w-2xl mx-auto">
-            Ödevden koçluğa, etütten atölyeye — öğrencilerimizin gün boyu
-            akademiyle iç içe anları.
+            Ödevden koçluğa, etütten atölyeye — öğrencilerimize sunduğumuz
+            tüm imkânlar.
           </p>
         </motion.div>
+      </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[140px] sm:auto-rows-[170px] lg:auto-rows-[190px] gap-3 sm:gap-4">
-          {items.map((item, index) => {
-            const Icon = item.icon;
-            const colSpan = item.span === "wide" ? "sm:col-span-2" : "";
-            const rowSpan = item.span === "tall" ? "row-span-2" : "";
+      {/* Full-width marquee rows */}
+      <div className="space-y-3 mt-2">
+        <MarqueeRow speed={36} />
+        <MarqueeRow reversed speed={28} />
+      </div>
 
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={`group relative overflow-hidden rounded-lg shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${colSpan} ${rowSpan}`}
-              >
-                {item.src ? (
-                  <>
-                    <Image
-                      src={item.src}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
-                  </>
-                ) : (
-                  <>
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`}
-                    />
-                    {/* Decorative shapes */}
-                    <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                    <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
-                    <div
-                      className="absolute inset-0 opacity-[0.08] pointer-events-none"
-                      style={{
-                        backgroundImage:
-                          "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-                        backgroundSize: "24px 24px",
-                      }}
-                    />
-                  </>
-                )}
-
-                {/* Content */}
-                <div className="relative h-full flex flex-col justify-between p-4 sm:p-5">
-                  <div
-                    className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${item.iconBg} backdrop-blur-sm flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110`}
-                  >
-                    <Icon
-                      className={`w-5 h-5 sm:w-5.5 sm:h-5.5 ${item.iconColor}`}
-                      strokeWidth={2}
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-white font-extrabold text-sm sm:text-base lg:text-lg leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-white/80 text-[11px] sm:text-xs mt-1 leading-snug line-clamp-2">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
+      {/* CTA */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -204,21 +208,29 @@ export default function Gallery() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-14 text-center"
         >
-          <p className="text-slate-600 mb-5">
+          <p className="text-[#586380] mb-5">
             Akademiyi yerinde görmek ister misiniz?
           </p>
-          <a
+          <motion.a
             href="#subelerimiz"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#2D2E83] text-white font-semibold rounded-full hover:bg-[#1e1f5c] transition-colors duration-200 cursor-pointer text-sm shadow-card-sm"
           >
             Şubelerimizi İncele
-          </a>
+          </motion.a>
         </motion.div>
       </div>
 
-      {/* Wave → Testimonials (#f6f7fb) */}
+      {/* Wave → Testimonials */}
       <div className="pointer-events-none mt-12 sm:mt-16 -mb-px">
-        <svg viewBox="0 0 1440 60" className="w-full block h-[40px] sm:h-[60px]" style={{ fill: "#f6f7fb" }} preserveAspectRatio="none">
+        <svg
+          viewBox="0 0 1440 60"
+          className="w-full block h-[40px] sm:h-[60px]"
+          style={{ fill: "#f6f7fb" }}
+          preserveAspectRatio="none"
+        >
           <path d="M0,60 L0,32 C360,60 720,6 1080,36 C1260,50 1380,34 1440,28 L1440,60 Z" />
         </svg>
       </div>
