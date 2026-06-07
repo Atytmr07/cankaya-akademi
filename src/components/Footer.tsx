@@ -1,4 +1,4 @@
-import { MapPin, Phone, User, Instagram } from "lucide-react";
+import { MapPin, Phone, User } from "lucide-react";
 
 const INSTAGRAM_URL = "https://www.instagram.com/cankayaakademi/";
 
@@ -80,7 +80,7 @@ export default function Footer() {
                 <span className="text-sm text-white/70">Sevgül Şener</span>
               </li>
               <li className="flex items-center gap-3">
-                <Instagram className="w-5 h-5 text-red-400 shrink-0" strokeWidth={1.8} />
+                <InstagramIcon className="w-5 h-5 text-red-400 shrink-0" />
                 <a
                   href="https://www.instagram.com/cankayaakademi/"
                   target="_blank"
