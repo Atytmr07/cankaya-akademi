@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   BookOpenCheck,
@@ -176,14 +177,29 @@ function ActivityCard({
   );
 }
 
+function useIsMobile() {
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return mobile;
+}
+
 function MarqueeRow({
   reversed = false,
   speed = 32,
+  mobileSpeed,
 }: {
   reversed?: boolean;
   speed?: number;
+  mobileSpeed?: number;
 }) {
   const [paused, setPaused] = useState(false);
+  const isMobile = useIsMobile();
+  const effectiveSpeed = isMobile && mobileSpeed ? mobileSpeed : speed;
   const row = reversed ? [...items].reverse() : items;
   const doubled = [...row, ...row];
 
@@ -196,7 +212,7 @@ function MarqueeRow({
       <div
         className="flex"
         style={{
-          animation: `${reversed ? "marquee-right" : "marquee-left"} ${speed}s linear infinite`,
+          animation: `${reversed ? "marquee-right" : "marquee-left"} ${effectiveSpeed}s linear infinite`,
           animationPlayState: paused ? "paused" : "running",
           animationFillMode: "both",
           willChange: "transform",
@@ -209,6 +225,73 @@ function MarqueeRow({
             item={item}
             rotateDir={i % 2 === 0 ? 1 : -1}
           />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Photo strip ────────────────────────────────────────────────────────────
+
+const photoSlides = [
+  { src: "/gallery/ai-sinif-ortami.png",   label: "Etüt Salonu"        },
+  { src: "/gallery/ai-lgs-ogrenci.png",    label: "LGS Hazırlık"       },
+  { src: "/gallery/ai-birebir-kocluk.png", label: "Birebir Koçluk"     },
+  { src: "/gallery/etut-saatleri.png",     label: "Etüt Saatleri"      },
+  { src: "/gallery/ai-satranc.png",        label: "Satranç Atölyesi"   },
+  { src: "/gallery/lgs-hazirligi.png",     label: "LGS Çalışması"      },
+  { src: "/gallery/ai-etut-cocuk.png",     label: "Odaklanma Anı"      },
+  { src: "/gallery/ai-atolye.png",         label: "Yaratıcı Atölye"    },
+  { src: "/gallery/birebir-kocluk.png",    label: "Koçluk Seansı"      },
+  { src: "/gallery/satranc-zeka.png",      label: "Akıl Oyunları"      },
+];
+
+function PhotoCard({ src, label }: { src: string; label: string }) {
+  return (
+    <motion.div
+      whileHover={{ y: -8, scale: 1.04, rotate: 1 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 350, damping: 20 }}
+      className="relative shrink-0 w-[200px] sm:w-[230px] h-[145px] sm:h-[165px] mx-3 rounded-2xl overflow-hidden shadow-card cursor-default group"
+    >
+      <Image
+        src={src}
+        alt={label}
+        fill
+        sizes="230px"
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+      {/* Label */}
+      <span className="absolute bottom-3 left-3 text-white text-[11px] font-semibold tracking-wide drop-shadow-sm">
+        {label}
+      </span>
+    </motion.div>
+  );
+}
+
+function PhotoMarquee() {
+  const [paused, setPaused] = useState(false);
+  const doubled = [...photoSlides, ...photoSlides];
+
+  return (
+    <div
+      className="overflow-hidden py-2"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div
+        className="flex"
+        style={{
+          animation: `marquee-left 45s linear infinite`,
+          animationPlayState: paused ? "paused" : "running",
+          animationFillMode: "both",
+          willChange: "transform",
+        }}
+      >
+        {doubled.map((p, i) => (
+          <PhotoCard key={`${p.src}-${i}`} src={p.src} label={p.label} />
         ))}
       </div>
     </div>
@@ -282,9 +365,41 @@ export default function Gallery() {
         />
 
         <div className="space-y-3">
-          <MarqueeRow speed={38} />
-          <MarqueeRow reversed speed={30} />
+          <MarqueeRow speed={38} mobileSpeed={20} />
+          <MarqueeRow reversed speed={30} mobileSpeed={16} />
         </div>
+      </div>
+
+      {/* ── Photo strip ── */}
+      <div className="relative mt-14">
+        {/* Section label */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="flex items-center gap-3"
+          >
+            <span className="text-lg">📸</span>
+            <span className="text-sm font-semibold text-[#586380] tracking-wide">
+              Akademimizden Kareler
+            </span>
+            <div className="flex-1 h-px bg-[#d9dde8]/70" />
+          </motion.div>
+        </div>
+
+        {/* Edge masks */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-10 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, white 0%, transparent 100%)" }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-10 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, white 0%, transparent 100%)" }}
+        />
+
+        <PhotoMarquee />
       </div>
 
       {/* CTA */}
