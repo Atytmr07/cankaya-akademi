@@ -41,13 +41,22 @@ export const metadata: Metadata = {
     "Çankaya Akademi",
     "Kepez etüt merkezi",
     "Kepez akademi",
+    "Kepez kurs",
+    "Kepez etüt",
+    "Antalya etüt merkezi",
     "Antalya LGS hazırlık",
     "Kepez özel ders",
     "Kepez eğitim koçluğu",
+    "Masadağı etüt merkezi",
+    "Masadağı kurs",
+    "Masadağı akademi",
     "ilkokul etüt Antalya",
+    "ilkokul kurs Kepez",
     "ortaokul etüt Kepez",
+    "ortaokul kurs Kepez",
     "ortaokul destek merkezi Antalya",
     "LGS hazırlık Kepez",
+    "LGS hazırlık Antalya",
     "ilkokul özel ders Kepez",
     "satranç kursu Antalya",
     "satranç kursu Kepez",
@@ -86,6 +95,12 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
 
+  icons: {
+    icon: "/logo-icon.jpeg",
+    shortcut: "/logo-icon.jpeg",
+    apple: "/logo-icon.jpeg",
+  },
+
   openGraph: {
     title: "Çankaya Akademi | Kepez Antalya — Etüt, LGS Hazırlık & Eğitim Koçluğu",
     description:
@@ -96,20 +111,20 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/2026-02-09.webp",
-        width: 1200,
-        height: 800,
+        url: "/logo-icon.jpeg",
+        width: 400,
+        height: 400,
         alt: "Çankaya Akademi — Kepez, Antalya",
       },
     ],
   },
 
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Çankaya Akademi | Kepez Antalya — Etüt & LGS Hazırlık",
     description:
       "Kepez'de 1–8. sınıf için etüt, LGS hazırlık, birebir koçluk, İngilizce ve satranç. Google 5.0 ⭐",
-    images: ["/2026-02-09.webp"],
+    images: ["/logo-icon.jpeg"],
   },
 
   other: {
@@ -120,8 +135,8 @@ export const metadata: Metadata = {
     ICBM: "36.9362105, 30.6779566",
     // Dublin Core
     "dc.language": "tr",
-    "dc.coverage": "Kepez, Antalya, Türkiye",
-    "dc.subject": "Etüt Merkezi, LGS Hazırlık, Eğitim Koçluğu, Kepez",
+    "dc.coverage": "Kepez, Masadağı, Antalya, Türkiye",
+    "dc.subject": "Etüt Merkezi, LGS Hazırlık, Eğitim Koçluğu, Kepez, Masadağı",
   },
 };
 
@@ -134,13 +149,13 @@ const jsonLd = {
       "@type": ["LocalBusiness", "EducationalOrganization"],
       "@id": `${BASE_URL}/#organization`,
       name: "Çankaya Akademi",
-      alternateName: ["Cankaya Akademi", "Çankaya Etüt Merkezi"],
+      alternateName: ["Cankaya Akademi", "Çankaya Etüt Merkezi", "Kepez Etüt Merkezi", "Masadağı Etüt Merkezi"],
       url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/logo.png`,
-        width: 200,
-        height: 200,
+        url: `${BASE_URL}/logo-icon.jpeg`,
+        width: 400,
+        height: 400,
       },
       image: `${BASE_URL}/2026-02-09.webp`,
       description:
@@ -180,6 +195,8 @@ const jsonLd = {
       ],
       areaServed: [
         { "@type": "City", name: "Kepez", "@id": "https://www.wikidata.org/wiki/Q1006490" },
+        { "@type": "Neighborhood", name: "Masadağı" },
+        { "@type": "Neighborhood", name: "Çankaya Mahallesi" },
         { "@type": "AdministrativeArea", name: "Antalya" },
       ],
       sameAs: [

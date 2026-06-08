@@ -136,9 +136,6 @@ export default function Navbar() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
-              <div className="w-8 h-8 rounded-xl bg-[#2D2E83] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200 shrink-0">
-                <span className="text-white font-extrabold text-sm leading-none select-none">Ç</span>
-              </div>
               <div className="flex items-baseline gap-1">
                 <span className="text-lg sm:text-xl font-extrabold text-[#2D2E83] tracking-tight leading-none">
                   Çankaya

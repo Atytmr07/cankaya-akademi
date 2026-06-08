@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MapPin, Phone, User } from "lucide-react";
 
 const INSTAGRAM_URL = "https://www.instagram.com/cankayaakademi/";
@@ -28,11 +29,17 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-5">
-              <span className="text-2xl font-extrabold text-white tracking-tight">
-                Çankaya
-              </span>
-              <span className="text-2xl font-light text-red-400">Akademi</span>
+            <div className="mb-5">
+              <div className="inline-block bg-white rounded-2xl px-5 py-3 shadow-xl shadow-black/25">
+                <Image
+                  src="/logo-full.jpeg"
+                  alt="Çankaya Akademi Eğitim Kurumları"
+                  width={200}
+                  height={68}
+                  className="h-14 w-auto object-contain"
+                  priority={false}
+                />
+              </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">
               İlkokul ve ortaokul öğrencileri için akademik destek, LGS
