@@ -48,13 +48,14 @@ const branches: Branch[] = [
   {
     name: "Çankaya Akademi · 2. Şube",
     tag: "Etüt & Sosyal Gelişim Merkezi",
-    address: "Adres yakında güncellenecektir · Kepez / Antalya",
+    address:
+      "Çankaya Mah. Barış Manço Bulvarı Hill Palace Konutları B Blok No:185 / B No:15, Kepez / Antalya",
     phone: "0544 211 75 17",
     hours: "Pzt - Cmt · 09:00 - 19:00",
-    mapsUrl: "#",
+    mapsUrl:
+      "https://maps.google.com/?q=Hill+Palace+Konutları+Barış+Manço+Bulvarı+Kepez+Antalya",
     embedUrl: "",
     photos: [],
-    isTemplate: true,
   },
 ];
 

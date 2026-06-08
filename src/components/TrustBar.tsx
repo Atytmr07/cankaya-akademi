@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useTransform, useSpring, type Variants } from "framer-motion";
-import { GraduationCap, Bus, Brain, MapPin, type LucideIcon } from "lucide-react";
+import { GraduationCap, Bus, Brain, MapPin, Lightbulb, type LucideIcon } from "lucide-react";
 import { useRef } from "react";
 
 type Feature = {
@@ -63,6 +63,18 @@ const features: Feature[] = [
     strip: "bg-amber-400",
     badge: "Kepez'de",
     badgeCls: "bg-amber-100 text-amber-700",
+  },
+  {
+    icon: Lightbulb,
+    title: "Motivasyon",
+    subtitle: "ve Rehberlik",
+    description: "Özgüven ve hedef belirleme süreçlerinde kişiye özel rehberlik desteği",
+    accent: "#059669",
+    bg: "from-emerald-50 to-teal-50/60",
+    iconBg: "bg-emerald-100",
+    strip: "bg-emerald-400",
+    badge: "Rehberlik",
+    badgeCls: "bg-emerald-100 text-emerald-700",
   },
 ];
 
@@ -164,7 +176,7 @@ export default function TrustBar() {
             Neden Çankaya Akademi?
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#282e3e] tracking-tight">
-            Fark Yaratan 4 Özelliğimiz
+            5 Temel Özelliğimiz
           </h2>
         </motion.div>
 
@@ -173,7 +185,7 @@ export default function TrustBar() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
           style={{ perspective: "1200px" }}
         >
           {features.map((f) => (

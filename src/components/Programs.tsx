@@ -49,7 +49,7 @@ const programs: Program[] = [
     description:
       "Eğlenerek öğrenme prensipleriyle temel akademik becerileri güçlendiriyoruz.",
     longDescription:
-      "Çocukların yaş gruplarına uygun, oyun temelli ve etkileşimli yöntemlerle hem akademik hem sosyal becerilerini geliştiriyoruz. Birebir takip ve veli iletişimiyle her öğrencinin gelişimini yakından izliyoruz.",
+      "Çocukların yaş gruplarına uygun, oyun temelli ve etkileşimli yöntemlerle hem akademik hem sosyal becerilerini geliştiriyoruz. Birebir takip, rehberlik desteği ve düzenli veli bilgilendirme sistemiyle her öğrencinin gelişimini yakından izliyoruz.",
     accentBg: "bg-[#2D2E83]",
     accentText: "text-[#2D2E83]",
     accentBgSoft: "bg-[#2D2E83]/8",
@@ -67,7 +67,7 @@ const programs: Program[] = [
         icon: Trophy,
         label: "Bursluluk Sınavlarına Hazırlık",
         detail:
-          "İOKBS ve özel bursluluk sınavları için sistematik konu anlatımı, soru bankası ve deneme programı.",
+          "İOKBS, özel bursluluk ve proje okullarına hazırlık sınavları için sistematik konu anlatımı, soru bankası, deneme programı ve kamp sistemi.",
       },
       {
         icon: Globe,
@@ -81,6 +81,24 @@ const programs: Program[] = [
         detail:
           "Stratejik düşünme, odaklanma ve problem çözme becerilerini geliştiren özel atölyeler.",
       },
+      {
+        icon: Users,
+        label: "Bireysel Öğrenci Takibi",
+        detail:
+          "Her öğrencinin güçlü ve geliştirilmesi gereken yönleri birebir takip edilerek aileyle düzenli paylaşılır.",
+      },
+      {
+        icon: BookOpen,
+        label: "Okuma & Anlama Becerileri",
+        detail:
+          "Yaş grubuna uygun okuma egzersizleri ve metin anlama teknikleriyle dil ve kavrama becerileri güçlendirilir.",
+      },
+      {
+        icon: Lightbulb,
+        label: "Rehberlik ve Motivasyon",
+        detail:
+          "Öğrencinin özgüvenini canlı tutmak için düzenli geri bildirim ve bireysel hedef belirleme seansları.",
+      },
     ],
   },
   {
@@ -88,7 +106,7 @@ const programs: Program[] = [
     badge: "5-8. Sınıf",
     badgeIcon: Target,
     title: "Ortaokul & LGS",
-    subtitle: "Sosyal Gelişim Merkezi",
+    subtitle: "SEGEM Sosyal Etkinlik ve Gelişim Merkezi",
     description:
       "LGS hedefli, bilimsel yöntemlerle desteklenen kapsamlı hazırlık programı.",
     longDescription:
@@ -130,6 +148,24 @@ const programs: Program[] = [
         label: "Deneme Kulübü",
         detail:
           "Gerçek sınav koşullarında düzenli denemeler, detaylı analiz raporları ve birebir geri bildirim.",
+      },
+      {
+        icon: BookOpenCheck,
+        label: "Sessiz Kütüphane Sistemi",
+        detail:
+          "Konsantrasyon gerektiren çalışmalar için sessiz, düzenli kütüphane alanları — tam odaklanma ortamı.",
+      },
+      {
+        icon: Globe,
+        label: "Online Eğitim Desteği",
+        detail:
+          "Hastalık veya uzakta olma durumlarında derslerin aksamadan sürmesi için online eğitim imkânı.",
+      },
+      {
+        icon: ClipboardList,
+        label: "Ödevlere Destek",
+        detail:
+          "Okul ödevlerinin eksiksiz tamamlanması için uzman gözetiminde günlük ödev takip programı.",
       },
     ],
   },
