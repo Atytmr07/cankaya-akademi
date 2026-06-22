@@ -552,12 +552,15 @@ export default function Branches() {
                         }
                         className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 cursor-pointer transition-all duration-200 ${
                           i === lightbox.index
-                            ? "ring-2 ring-offset-2"
+                            ? "opacity-100"
                             : "opacity-55 hover:opacity-100"
                         }`}
                         style={
                           i === lightbox.index
-                            ? { ringColor: lightbox.branch.accent }
+                            ? {
+                                outline: `2px solid ${lightbox.branch.accent}`,
+                                outlineOffset: "2px",
+                              }
                             : undefined
                         }
                         aria-label={`Fotoğraf ${i + 1}`}
