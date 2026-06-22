@@ -88,7 +88,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
 };
 
-function TiltCard({ feature }: { feature: Feature }) {
+function TiltCard({ feature, className }: { feature: Feature; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
@@ -122,7 +122,7 @@ function TiltCard({ feature }: { feature: Feature }) {
       whileTap={{ scale: 0.98 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`group relative bg-gradient-to-br ${feature.bg} rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300 cursor-default`}
+      className={`group relative bg-gradient-to-br ${feature.bg} rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300 cursor-default ${className ?? ""}`}
     >
       {/* Top accent strip */}
       <div className={`h-1 w-full ${feature.strip}`} />
@@ -185,11 +185,19 @@ export default function TrustBar() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
+          className="grid grid-cols-6 xl:grid-cols-5 gap-5"
           style={{ perspective: "1200px" }}
         >
-          {features.map((f) => (
-            <TiltCard key={f.title} feature={f} />
+          {features.map((f, i) => (
+            <TiltCard
+              key={f.title}
+              feature={f}
+              className={
+                i < 2
+                  ? "col-span-6 sm:col-span-3 xl:col-span-1"
+                  : "col-span-6 sm:col-span-2 xl:col-span-1"
+              }
+            />
           ))}
         </motion.div>
       </div>
