@@ -273,6 +273,8 @@ function PhotoCard({ src, label }: { src: string; label: string }) {
 
 function PhotoMarquee() {
   const [paused, setPaused] = useState(false);
+  const isMobile = useIsMobile();
+  const speed = isMobile ? 20 : 45;
   const doubled = [...photoSlides, ...photoSlides];
 
   return (
@@ -284,7 +286,7 @@ function PhotoMarquee() {
       <div
         className="flex"
         style={{
-          animation: `marquee-left 45s linear infinite`,
+          animation: `marquee-left ${speed}s linear infinite`,
           animationPlayState: paused ? "paused" : "running",
           animationFillMode: "both",
           willChange: "transform",
