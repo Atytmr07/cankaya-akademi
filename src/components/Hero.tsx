@@ -86,8 +86,10 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-6 text-base sm:text-lg text-white/65 leading-relaxed max-w-lg"
           >
-            Antalya Kepez&apos;de; ilkokul ve ortaokul öğrencileri için
-            akademik destek, LGS hazırlık ve kişisel gelişim merkezi.
+            Kepez ve Masadağı&apos;nda ilkokul &amp; ortaokul için{" "}
+            <strong className="font-bold text-white/85">etüt merkezi</strong>,{" "}
+            <strong className="font-bold text-white/85">LGS hazırlık kursu</strong>{" "}
+            ve birebir eğitim koçluğu. 2 şube · Servis imkânı.
           </motion.p>
 
           {/* CTA buttons */}
